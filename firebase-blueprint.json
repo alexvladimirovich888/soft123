@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "Account": {
+      "title": "X Account",
+      "description": "Details of an X (Twitter) profile managed in the dashboard.",
+      "type": "object",
+      "properties": {
+        "handle": { "type": "string", "description": "The X handle (e.g., @username)" },
+        "display_name": { "type": "string", "description": "The display name on the profile" },
+        "followers": { "type": "number", "description": "Number of followers" },
+        "category": { "type": "string", "description": "Category of the account (e.g., TECH, NEWS)" },
+        "status": { "type": "string", "enum": ["active", "banned"], "description": "Current status of the account" },
+        "email": { "type": "string", "format": "email", "description": "Login email for the account" },
+        "password": { "type": "string", "description": "Login password for the account" },
+        "two_fa_seed": { "type": "string", "description": "2FA seed for generating codes" },
+        "notes": { "type": "string", "description": "Additional notes about the account" },
+        "owner_uid": { "type": "string", "description": "Firebase UID of the user who owns this account" },
+        "project_id": { "type": "string", "description": "ID of the project this account belongs to" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["handle", "display_name", "owner_uid", "status"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "A group of X accounts.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the project" },
+        "description": { "type": "string", "description": "Description of the project" },
+        "owner_uid": { "type": "string", "description": "Firebase UID of the user who owns this project" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "owner_uid"]
+    }
+  },
+  "firestore": {
+    "/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "Collection of managed X accounts"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Collection of projects"
+    }
+  }
+}

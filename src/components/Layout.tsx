@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Plus, LayoutDashboard, Users as UsersIcon, FolderKanban, Settings, Bell } from 'lucide-react';
+import { Plus, Users as UsersIcon, FolderKanban, Settings, Bell, LogOut } from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +11,8 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, activeTab, setActiveTab }: LayoutProps) {
+  const { user, logout } = useAuth();
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent-green/30">
       {/* Header */}
@@ -36,14 +40,21 @@ export default function Layout({ children, activeTab, setActiveTab }: LayoutProp
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground h-9 w-9">
-              <Bell className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground h-9 w-9">
-              <Settings className="h-4 w-4" />
+            <div className="flex items-center gap-2 mr-2">
+              <Avatar className="h-7 w-7 border border-border">
+                <AvatarImage src={user?.photoURL || ''} />
+                <AvatarFallback>{user?.displayName?.[0] || 'U'}</AvatarFallback>
+              </Avatar>
+              <span className="text-xs font-medium text-muted-foreground hidden md:block">{user?.displayName}</span>
+            </div>
+            <Button variant="ghost" size="icon" onClick={logout} className="text-muted-foreground hover:text-destructive h-9 w-9" title="Logout">
+              <LogOut className="h-4 w-4" />
             </Button>
             <div className="h-4 w-[1px] bg-border mx-1"></div>
-            <Button className="bg-[#22c55e] hover:bg-[#1eb054] text-black font-semibold h-9 px-4 rounded-md">
+            <Button 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-add-account'))}
+              className="bg-[#22c55e] hover:bg-[#1eb054] text-black font-semibold h-9 px-4 rounded-md"
+            >
               <Plus className="h-4 w-4 mr-2" />
               Add Profile
             </Button>

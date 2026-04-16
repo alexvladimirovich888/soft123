@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: accounts
+    // Fields:
+    //   - handle: string (required)
+    //   - display_name: string (required)
+    //   - followers: number
+    //   - category: string
+    //   - status: string (active, banned)
+    //   - email: string
+    //   - password: string
+    //   - two_fa_seed: string
+    //   - notes: string
+    //   - owner_uid: string (required, immutable)
+    //   - project_id: string
+    //   - created_at: timestamp
+    //
+    // Collection: projects
+    // Fields:
+    //   - name: string (required)
+    //   - description: string
+    //   - owner_uid: string (required, immutable)
+    //   - created_at: timestamp
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(ownerUid) {
+      return isAuthenticated() && request.auth.uid == ownerUid;
+    }
+
+    function isDocOwner() {
+      return isOwner(resource.data.owner_uid);
+    }
+
+    function isValidAccount(data) {
+      return data.handle is string && data.handle.size() > 0 && data.handle.size() < 100 &&
+             data.display_name is string && data.display_name.size() > 0 && data.display_name.size() < 100 &&
+             data.owner_uid == request.auth.uid &&
+             (data.status == 'active' || data.status == 'banned');
+    }
+
+    function isValidProject(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.owner_uid == request.auth.uid;
+    }
+
+    // Rules for Accounts
+    match /accounts/{accountId} {
+      allow read: if isDocOwner();
+      allow create: if isAuthenticated() && isValidAccount(request.resource.data);
+      allow update: if isDocOwner() && isValidAccount(request.resource.data) && 
+                      request.resource.data.owner_uid == resource.data.owner_uid;
+      allow delete: if isDocOwner();
+    }
+
+    // Rules for Projects
+    match /projects/{projectId} {
+      allow read: if isDocOwner();
+      allow create: if isAuthenticated() && isValidProject(request.resource.data);
+      allow update: if isDocOwner() && isValidProject(request.resource.data) && 
+                      request.resource.data.owner_uid == resource.data.owner_uid;
+      allow delete: if isDocOwner();
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
