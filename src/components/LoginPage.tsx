@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '@/lib/AuthContext';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button.tsx';
 import { LogIn } from 'lucide-react';
 
 export default function LoginPage() {

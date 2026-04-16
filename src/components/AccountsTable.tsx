@@ -6,20 +6,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/Table";
-import { Badge } from "@/components/ui/Badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+} from "@/components/ui/table.tsx";
+import { Badge } from "@/components/ui/badge.tsx";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
 import { XAccount } from '@/types';
 import { Search, ArrowUpDown, X, Eye, EyeOff, Plus, ShieldAlert, ShieldCheck, Trash2 } from 'lucide-react';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/input.tsx';
+import { Button } from '@/components/ui/button.tsx';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/Select";
+} from "@/components/ui/select.tsx";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/Dialog";
+} from "@/components/ui/dialog.tsx";
 import { db, collection, query, where, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from '@/lib/firebase';
 import { useAuth } from '@/lib/AuthContext';
 

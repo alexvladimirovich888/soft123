@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Badge } from "@/components/ui/badge.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import { Project } from '@/types';
 import { Users, Calendar, ArrowRight, Plus, Trash2 } from 'lucide-react';
 import { db, collection, query, where, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from '@/lib/firebase';
@@ -14,8 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/Dialog";
-import { Input } from '@/components/ui/Input';
+} from "@/components/ui/dialog.tsx";
+import { Input } from '@/components/ui/input.tsx';
 
 export default function ProjectsGrid() {
   const { user } = useAuth();
