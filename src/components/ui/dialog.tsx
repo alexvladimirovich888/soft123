@@ -15,12 +15,14 @@ function DialogTrigger({
   children,
   asChild,
   render,
+  nativeButton,
   ...props
 }: DialogPrimitive.Trigger.Props & { asChild?: boolean }) {
   return (
     <DialogPrimitive.Trigger
       data-slot="dialog-trigger"
       render={asChild ? children : render}
+      nativeButton={asChild ? false : nativeButton}
       {...props}
     >
       {asChild ? undefined : children}
@@ -36,12 +38,14 @@ function DialogClose({
   children,
   asChild,
   render,
+  nativeButton,
   ...props
 }: DialogPrimitive.Close.Props & { asChild?: boolean }) {
   return (
     <DialogPrimitive.Close
       data-slot="dialog-close"
       render={asChild ? children : render}
+      nativeButton={asChild ? false : nativeButton}
       {...props}
     >
       {asChild ? undefined : children}

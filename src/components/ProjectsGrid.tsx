@@ -114,7 +114,7 @@ export default function ProjectsGrid() {
       ))}
       
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-        <DialogTrigger asChild>
+        <DialogTrigger asChild nativeButton={false}>
           <Card className="bg-transparent border-dashed border-border hover:border-accent-green/50 transition-all cursor-pointer flex items-center justify-center p-8 group">
             <div className="text-center space-y-2">
               <div className="bg-secondary rounded-full h-12 w-12 flex items-center justify-center mx-auto border border-border group-hover:bg-accent-green/10 group-hover:border-accent-green/30 transition-all">

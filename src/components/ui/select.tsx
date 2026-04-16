@@ -32,6 +32,7 @@ function SelectTrigger({
   children,
   asChild,
   render,
+  nativeButton,
   ...props
 }: SelectPrimitive.Trigger.Props & {
   size?: "sm" | "default"
@@ -46,6 +47,7 @@ function SelectTrigger({
         className
       )}
       render={asChild ? children : render}
+      nativeButton={asChild ? false : nativeButton}
       {...props}
     >
       {asChild ? undefined : (
