@@ -7,19 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/Table";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/Badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { XAccount } from '@/types';
 import { Search, ArrowUpDown, X, Eye, EyeOff, Plus, ShieldAlert, ShieldCheck, Trash2 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/Select";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import { db, collection, query, where, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from '@/lib/firebase';
 import { useAuth } from '@/lib/AuthContext';
 

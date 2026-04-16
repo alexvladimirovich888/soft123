@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Plus, Users as UsersIcon, FolderKanban, Settings, Bell, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 
 interface LayoutProps {
   children: React.ReactNode;
